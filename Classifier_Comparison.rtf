@@ -1,0 +1,193 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red157\green0\blue210;\red245\green245\blue245;\red0\green0\blue0;
+\red144\green1\blue18;\red18\green112\blue68;\red0\green0\blue255;\red15\green112\blue1;\red101\green76\blue29;
+\red31\green99\blue128;}
+{\*\expandedcolortbl;;\cssrgb\c68627\c0\c85882;\cssrgb\c96863\c96863\c96863;\cssrgb\c0\c0\c0;
+\cssrgb\c63922\c8235\c8235;\cssrgb\c3529\c50588\c33725;\cssrgb\c0\c0\c100000;\cssrgb\c0\c50196\c0;\cssrgb\c47451\c36863\c14902;
+\cssrgb\c14510\c46275\c57647;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 import\cf0 \strokec4  sklearn\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.metrics \cf2 \strokec2 import\cf0 \strokec4  ConfusionMatrixDisplay\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn \cf2 \strokec2 import\cf0 \strokec4  metrics\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.neighbors \cf2 \strokec2 import\cf0 \strokec4  KNeighborsClassifier\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.svm \cf2 \strokec2 import\cf0 \strokec4  SVC\cb1 \
+\cf2 \cb3 \strokec2 import\cf0 \strokec4  seaborn \cf2 \strokec2 as\cf0 \strokec4  sns\cb1 \
+\cf2 \cb3 \strokec2 import\cf0 \strokec4  pandas \cf2 \strokec2 as\cf0 \strokec4  pd\cb1 \
+\cf2 \cb3 \strokec2 import\cf0 \strokec4  numpy \cf2 \strokec2 as\cf0 \strokec4  np\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.decomposition \cf2 \strokec2 import\cf0 \strokec4  PCA\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn \cf2 \strokec2 import\cf0 \strokec4  preprocessing\cb1 \
+\cf2 \cb3 \strokec2 import\cf0 \strokec4  matplotlib.pyplot \cf2 \strokec2 as\cf0 \strokec4  plt\cb1 \
+\cf2 \cb3 \strokec2 import\cf0 \strokec4  random\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb3 X = total_data.drop([\cf5 \cb3 \strokec5 'Outcome'\cf0 \cb3 \strokec4 ], axis=\cf6 \cb3 \strokec6 1\cf0 \cb3 \strokec4 )\cb1 \
+\cb3 y = total_data[\cf5 \cb3 \strokec5 'Outcome'\cf0 \cb3 \strokec4 ]\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.model_selection \cf2 \strokec2 import\cf0 \strokec4  train_test_split\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.metrics \cf2 \strokec2 import\cf0 \strokec4  recall_score, f1_score, precision_score, roc_curve, auc, confusion_matrix\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.model_selection \cf2 \strokec2 import\cf0 \strokec4  learning_curve\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.neural_network \cf2 \strokec2 import\cf0 \strokec4  MLPClassifier\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.svm \cf2 \strokec2 import\cf0 \strokec4  SVC\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.gaussian_process \cf2 \strokec2 import\cf0 \strokec4  GaussianProcessClassifier\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.ensemble \cf2 \strokec2 import\cf0 \strokec4  GradientBoostingClassifier\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.gaussian_process.kernels \cf2 \strokec2 import\cf0 \strokec4  RBF\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.tree \cf2 \strokec2 import\cf0 \strokec4  DecisionTreeClassifier\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.ensemble \cf2 \strokec2 import\cf0 \strokec4  ExtraTreesClassifier\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.ensemble \cf2 \strokec2 import\cf0 \strokec4  RandomForestClassifier, AdaBoostClassifier\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.naive_bayes \cf2 \strokec2 import\cf0 \strokec4  GaussianNB\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.discriminant_analysis \cf2 \strokec2 import\cf0 \strokec4  QuadraticDiscriminantAnalysis\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.linear_model \cf2 \strokec2 import\cf0 \strokec4  SGDClassifier\cb1 \
+\cf2 \cb3 \strokec2 from\cf0 \strokec4  sklearn.discriminant_analysis \cf2 \strokec2 import\cf0 \strokec4  LinearDiscriminantAnalysis\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb3 names = [\cb1 \
+\cb3     \cf5 \cb3 \strokec5 "Nearest_Neighbors"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "Linear_SVM"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "Polynomial_SVM"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "RBF_SVM"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "Gaussian_Process"\cf0 \cb3 \strokec4 ,\cb1 \
+\cb3     \cf5 \cb3 \strokec5 "Gradient_Boosting"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "Decision_Tree"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "Extra_Trees"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "Random_Forest"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "Neural_Net"\cf0 \cb3 \strokec4 ,\cb1 \
+\cb3     \cf5 \cb3 \strokec5 "AdaBoost"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "Naive_Bayes"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "QDA"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "SGD"\cf0 \cb3 \strokec4 , \cf5 \cb3 \strokec5 "LDA"\cf0 \cb1 \strokec4 \
+\cb3 ]\cb1 \
+\
+\cb3 classifiers = [\cb1 \
+\cb3     KNeighborsClassifier(\cf6 \cb3 \strokec6 3\cf0 \cb3 \strokec4 ),\cb1 \
+\cb3     SVC(C=\cf6 \cb3 \strokec6 0.01\cf0 \cb3 \strokec4 , gamma=\cf6 \cb3 \strokec6 1\cf0 \cb3 \strokec4 , kernel=\cf5 \cb3 \strokec5 'linear'\cf0 \cb3 \strokec4 ),\cb1 \
+\cb3     SVC(kernel=\cf5 \cb3 \strokec5 "poly"\cf0 \cb3 \strokec4 , degree=\cf6 \cb3 \strokec6 3\cf0 \cb3 \strokec4 , C=\cf6 \cb3 \strokec6 0.025\cf0 \cb3 \strokec4 ),\cb1 \
+\cb3     SVC(kernel=\cf5 \cb3 \strokec5 "rbf"\cf0 \cb3 \strokec4 , C=\cf6 \cb3 \strokec6 1\cf0 \cb3 \strokec4 , gamma=\cf6 \cb3 \strokec6 2\cf0 \cb3 \strokec4 ),\cb1 \
+\cb3     GaussianProcessClassifier(\cf6 \cb3 \strokec6 1.0\cf0 \cb3 \strokec4  * RBF(\cf6 \cb3 \strokec6 1.0\cf0 \cb3 \strokec4 )),\cb1 \
+\cb3     GradientBoostingClassifier(n_estimators=\cf6 \cb3 \strokec6 100\cf0 \cb3 \strokec4 , learning_rate=\cf6 \cb3 \strokec6 1.0\cf0 \cb3 \strokec4 ),\cb1 \
+\cb3     DecisionTreeClassifier(max_depth=\cf6 \cb3 \strokec6 5\cf0 \cb3 \strokec4 ),\cb1 \
+\cb3     ExtraTreesClassifier(n_estimators=\cf6 \cb3 \strokec6 10\cf0 \cb3 \strokec4 , min_samples_split=\cf6 \cb3 \strokec6 2\cf0 \cb3 \strokec4 ),\cb1 \
+\cb3     RandomForestClassifier(max_depth=\cf6 \cb3 \strokec6 5\cf0 \cb3 \strokec4 , n_estimators=\cf6 \cb3 \strokec6 100\cf0 \cb3 \strokec4 ),\cb1 \
+\cb3     MLPClassifier(alpha=\cf6 \cb3 \strokec6 1\cf0 \cb3 \strokec4 , max_iter=\cf6 \cb3 \strokec6 1000\cf0 \cb3 \strokec4 ),\cb1 \
+\cb3     AdaBoostClassifier(n_estimators=\cf6 \cb3 \strokec6 100\cf0 \cb3 \strokec4 ),\cb1 \
+\cb3     GaussianNB(),\cb1 \
+\cb3     QuadraticDiscriminantAnalysis(),\cb1 \
+\cb3     SGDClassifier(loss=\cf5 \cb3 \strokec5 "hinge"\cf0 \cb3 \strokec4 , penalty=\cf5 \cb3 \strokec5 "l2"\cf0 \cb3 \strokec4 ),\cb1 \
+\cb3     LinearDiscriminantAnalysis()\cb1 \
+\cb3 ]\cb1 \
+\
+\cb3 random_seeds = [\cf6 \cb3 \strokec6 18533\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 12345\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 98765\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 54321\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 11111\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 99999\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 77777\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 22222\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 66666\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 44444\cf0 \cb3 \strokec4 ]\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 \strokec2 for\cf0 \strokec4  seed \cf7 \cb3 \strokec7 in\cf0 \cb3 \strokec4  random_seeds:\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb3     random.seed(seed)\cb1 \
+\cb3     np.random.seed(seed)\cb1 \
+\
+\cb3     time_list = []  \cf8 \cb3 \strokec8 # Initialize an empty list for storing time\cf0 \cb1 \strokec4 \
+\
+\cb3     scores = []\cb1 \
+\cb3     recalls = []\cb1 \
+\cb3     f1_scores = []\cb1 \
+\cb3     precisions = []\cb1 \
+\cb3     times = []\cb1 \
+\
+\cb3     \cf2 \strokec2 for\cf0 \strokec4  name, clf \cf7 \cb3 \strokec7 in\cf0 \cb3 \strokec4  \cf9 \cb3 \strokec9 zip\cf0 \cb3 \strokec4 (names, classifiers):\cb1 \
+\cb3         start_time = time.time()\cb1 \
+\cb3         clf.fit(X_train, y_train)\cb1 \
+\cb3         score = clf.score(X_test, y_test)\cb1 \
+\cb3         scores.append(score)\cb1 \
+\cb3         y_pred = clf.predict(X_test)\cb1 \
+\cb3         recall = recall_score(y_test, y_pred, average=\cf7 \cb3 \strokec7 None\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         recalls.append(recall)\cb1 \
+\cb3         f1 = f1_score(y_test, y_pred, average=\cf7 \cb3 \strokec7 None\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         f1_scores.append(f1)\cb1 \
+\cb3         precision = precision_score(y_test, y_pred, average=\cf7 \cb3 \strokec7 None\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         precisions.append(precision)\cb1 \
+\cb3         end_time = time.time()\cb1 \
+\cb3         elapsed_time = end_time - start_time\cb1 \
+\cb3         time_list.append(elapsed_time)  \cf8 \cb3 \strokec8 # Append elapsed time to the list\cf0 \cb1 \strokec4 \
+\
+\cb3         \cf8 \cb3 \strokec8 # Plot confusion matrix for each classifier\cf0 \cb1 \strokec4 \
+\cb3         disp = ConfusionMatrixDisplay.from_estimator(clf, X_test, y_test, cmap=plt.cm.Blues)\cb1 \
+\cb3         plt.title(name)\cb1 \
+\cb3         plt.savefig(\cf7 \cb3 \strokec7 f\cf5 \strokec5 "\cf0 \cb3 \strokec4 \{name\}\cf5 \cb3 \strokec5 _confusion_matrix_seed_\cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 .png"\cf0 \cb3 \strokec4 , dpi=\cf6 \cb3 \strokec6 1000\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         plt.show()\cb1 \
+\
+\cb3         \cf8 \cb3 \strokec8 # Set up the figure and axes for learning curve\cf0 \cb1 \strokec4 \
+\cb3         fig, ax = plt.subplots(figsize=(\cf6 \cb3 \strokec6 8\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 6\cf0 \cb3 \strokec4 ))\cb1 \
+\
+\cb3         \cf8 \cb3 \strokec8 # Plot the learning curve\cf0 \cb1 \strokec4 \
+\cb3         train_sizes, train_scores, test_scores = learning_curve(clf, X_train, y_train, cv=\cf6 \cb3 \strokec6 5\cf0 \cb3 \strokec4 , n_jobs=\cf6 \cb3 \strokec6 -1\cf0 \cb3 \strokec4 , train_sizes=np.linspace(\cf6 \cb3 \strokec6 .1\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 1.0\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 10\cf0 \cb3 \strokec4 ))\cb1 \
+\cb3         train_scores_mean = np.mean(train_scores, axis=\cf6 \cb3 \strokec6 1\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         test_scores_mean = np.mean(test_scores, axis=\cf6 \cb3 \strokec6 1\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         ax.plot(train_sizes, train_scores_mean, label=\cf5 \cb3 \strokec5 'Training score'\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         ax.plot(train_sizes, test_scores_mean, label=\cf5 \cb3 \strokec5 'Cross-validation score'\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         ax.set_xlabel(\cf5 \cb3 \strokec5 'Training examples'\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         ax.set_ylabel(\cf5 \cb3 \strokec5 'Score'\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         ax.legend(loc=\cf5 \cb3 \strokec5 'best'\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         ax.set_title(\cf7 \cb3 \strokec7 f\cf5 \strokec5 'Learning Curve (\cf0 \cb3 \strokec4 \{name\}\cf5 \cb3 \strokec5 )'\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         ax.set_ylim(\cf6 \cb3 \strokec6 0\cf0 \cb3 \strokec4 , \cf6 \cb3 \strokec6 1.1\cf0 \cb3 \strokec4 )\cb1 \
+\
+\cb3         plt.tight_layout()\cb1 \
+\cb3         plt.savefig(\cf7 \cb3 \strokec7 f\cf5 \strokec5 "\cf0 \cb3 \strokec4 \{name\}\cf5 \cb3 \strokec5 _learning_curve_seed_\cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 .png"\cf0 \cb3 \strokec4 , dpi=\cf6 \cb3 \strokec6 1000\cf0 \cb3 \strokec4 )\cb1 \
+\cb3         plt.show()\cb1 \
+\
+\cb3     times.extend(time_list)  \cf8 \cb3 \strokec8 # Extend the main 'times' list with the elapsed times\cf0 \cb1 \strokec4 \
+\
+\cb3     \cf8 \cb3 \strokec8 # Plotting time\cf0 \cb1 \strokec4 \
+\cb3     ti = pd.DataFrame()\cb1 \
+\cb3     ti[\cf5 \cb3 \strokec5 'name'\cf0 \cb3 \strokec4 ] = names\cb1 \
+\cb3     ti[\cf5 \cb3 \strokec5 'time'\cf0 \cb3 \strokec4 ] = times\cb1 \
+\
+\cb3     sns.\cf10 \cb3 \strokec10 set\cf0 \cb3 \strokec4 (style=\cf5 \cb3 \strokec5 "whitegrid"\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     ax = sns.barplot(y=\cf5 \cb3 \strokec5 "name"\cf0 \cb3 \strokec4 , x=\cf5 \cb3 \strokec5 "time"\cf0 \cb3 \strokec4 , data=ti)\cb1 \
+\cb3     ax.set_title(\cf7 \cb3 \strokec7 f\cf5 \strokec5 'Time - Random Seed \cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 '\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     plt.savefig(\cf7 \cb3 \strokec7 f\cf5 \strokec5 "time_seed_\cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 .png"\cf0 \cb3 \strokec4 , dpi=\cf6 \cb3 \strokec6 1000\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     plt.show()\cb1 \
+\
+\cb3     \cf8 \cb3 \strokec8 # Plotting score\cf0 \cb1 \strokec4 \
+\cb3     sc = pd.DataFrame()\cb1 \
+\cb3     sc[\cf5 \cb3 \strokec5 'name'\cf0 \cb3 \strokec4 ] = names\cb1 \
+\cb3     sc[\cf5 \cb3 \strokec5 'score'\cf0 \cb3 \strokec4 ] = scores\cb1 \
+\
+\cb3     sns.\cf10 \cb3 \strokec10 set\cf0 \cb3 \strokec4 (style=\cf5 \cb3 \strokec5 "whitegrid"\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     ax = sns.barplot(y=\cf5 \cb3 \strokec5 "name"\cf0 \cb3 \strokec4 , x=\cf5 \cb3 \strokec5 "score"\cf0 \cb3 \strokec4 , data=sc)\cb1 \
+\cb3     ax.set_title(\cf7 \cb3 \strokec7 f\cf5 \strokec5 'Score - Random Seed \cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 '\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     plt.savefig(\cf7 \cb3 \strokec7 f\cf5 \strokec5 "score_seed_\cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 .png"\cf0 \cb3 \strokec4 , dpi=\cf6 \cb3 \strokec6 1000\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     plt.show()\cb1 \
+\
+\cb3     \cf8 \cb3 \strokec8 # Plotting precision\cf0 \cb1 \strokec4 \
+\cb3     pr = pd.DataFrame()\cb1 \
+\cb3     pr[\cf5 \cb3 \strokec5 'name'\cf0 \cb3 \strokec4 ] = names\cb1 \
+\cb3     pr[\cf5 \cb3 \strokec5 'precision'\cf0 \cb3 \strokec4 ] = precisions\cb1 \
+\
+\cb3     sns.\cf10 \cb3 \strokec10 set\cf0 \cb3 \strokec4 (style=\cf5 \cb3 \strokec5 "whitegrid"\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     ax = sns.barplot(y=\cf5 \cb3 \strokec5 "name"\cf0 \cb3 \strokec4 , x=\cf5 \cb3 \strokec5 "precision"\cf0 \cb3 \strokec4 , data=pr)\cb1 \
+\cb3     ax.set_title(\cf7 \cb3 \strokec7 f\cf5 \strokec5 'Precision - Random Seed \cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 '\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     plt.savefig(\cf7 \cb3 \strokec7 f\cf5 \strokec5 "precision_seed_\cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 .png"\cf0 \cb3 \strokec4 , dpi=\cf6 \cb3 \strokec6 1000\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     plt.show()\cb1 \
+\
+\cb3     \cf8 \cb3 \strokec8 # Plotting F1 score\cf0 \cb1 \strokec4 \
+\cb3     f1_sc = pd.DataFrame()\cb1 \
+\cb3     f1_sc[\cf5 \cb3 \strokec5 'name'\cf0 \cb3 \strokec4 ] = names\cb1 \
+\cb3     f1_sc[\cf5 \cb3 \strokec5 'f1'\cf0 \cb3 \strokec4 ] = f1_scores\cb1 \
+\
+\cb3     sns.\cf10 \cb3 \strokec10 set\cf0 \cb3 \strokec4 (style=\cf5 \cb3 \strokec5 "whitegrid"\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     ax = sns.barplot(y=\cf5 \cb3 \strokec5 "name"\cf0 \cb3 \strokec4 , x=\cf5 \cb3 \strokec5 "f1"\cf0 \cb3 \strokec4 , data=f1_sc)\cb1 \
+\cb3     ax.set_title(\cf7 \cb3 \strokec7 f\cf5 \strokec5 'F1 Score - Random Seed \cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 '\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     plt.savefig(\cf7 \cb3 \strokec7 f\cf5 \strokec5 "f1_score_seed_\cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 .png"\cf0 \cb3 \strokec4 , dpi=\cf6 \cb3 \strokec6 1000\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     plt.show()\cb1 \
+\
+\cb3     \cf8 \cb3 \strokec8 # Plotting recall\cf0 \cb1 \strokec4 \
+\cb3     rec = pd.DataFrame()\cb1 \
+\cb3     rec[\cf5 \cb3 \strokec5 'name'\cf0 \cb3 \strokec4 ] = names\cb1 \
+\cb3     rec[\cf5 \cb3 \strokec5 'recall'\cf0 \cb3 \strokec4 ] = recalls\cb1 \
+\
+\cb3     sns.\cf10 \cb3 \strokec10 set\cf0 \cb3 \strokec4 (style=\cf5 \cb3 \strokec5 "whitegrid"\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     ax = sns.barplot(y=\cf5 \cb3 \strokec5 "name"\cf0 \cb3 \strokec4 , x=\cf5 \cb3 \strokec5 "recall"\cf0 \cb3 \strokec4 , data=rec)\cb1 \
+\cb3     ax.set_title(\cf7 \cb3 \strokec7 f\cf5 \strokec5 'Recall - Random Seed \cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 '\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     plt.savefig(\cf7 \cb3 \strokec7 f\cf5 \strokec5 "recall_seed_\cf0 \cb3 \strokec4 \{seed\}\cf5 \cb3 \strokec5 .png"\cf0 \cb3 \strokec4 , dpi=\cf6 \cb3 \strokec6 1000\cf0 \cb3 \strokec4 )\cb1 \
+\cb3     plt.show()\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 \strokec2 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 \cb1 \strokec4 \
+\
+}
